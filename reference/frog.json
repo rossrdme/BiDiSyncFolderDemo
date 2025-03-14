@@ -1,0 +1,95 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Frog-schemed Themed API",
+    "version": "1.0.0",
+    "description": "A ribbiting API for frog enthusiasts"
+  },
+  "servers": [
+    {
+      "url": "https://{domain}",
+      "description": "Frog Server",
+      "variables": {
+        "domain": {
+          "enum": [
+            "dev.frogs.example.com",
+            "httpbin.org"
+          ],
+          "default": "dev.frogs.example.com",
+          "description": "Server domains"
+        }
+      }
+    }
+  ],
+  "paths": {
+    "/leapToServer": {
+      "post": {
+        "summary": "Leap to a server domain",
+        "description": "Allows you to leap to the chosen server domain",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "domain": {
+                    "type": "string",
+                    "enum": [
+                      "dev.frogs.example.com",
+                      "prod.frogs.example.com"
+                    ],
+                    "description": "Domain to leap to"
+                  }
+                },
+                "required": ["domain"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successfully leaped to the domain",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Successfully leaped to the domain"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/currentLilyPad": {
+      "get": {
+        "summary": "Get current server domain",
+        "description": "Returns the current lily pad (server domain) being used",
+        "responses": {
+          "200": {
+            "description": "Current lily pad domain",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "domain": {
+                      "type": "string",
+                      "example": "dev.frogs.example.com"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
